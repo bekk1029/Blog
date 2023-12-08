@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Logo } from "../assets/Logo";
 import { Search } from "../assets/Search";
 export function Navbar() {
@@ -5,8 +6,12 @@ export function Navbar() {
     <div className="flex gap-[130px] justify-between w-full items-center">
       <Logo />
       <div className="flex justify-center items-center gap-20 font-normal text-base text-gray-800">
-        <div className="flex items-center gap-4  cursor-pointer">Home</div>
-        <div className="flex items-center gap-4 cursor-pointer ">Blog</div>
+        <div className="flex items-center gap-4  cursor-pointer">
+          <Link href="/">Home</Link>
+        </div>
+        <div className="flex items-center gap-4 cursor-pointer ">
+          <Link href="/blog">Blog</Link>
+        </div>
         <div className="flex items-center gap-4 cursor-pointer ">Contact</div>
       </div>
       <div className="bg-gray-300 flex  items-center p-1 gap-2 rounded-md ">

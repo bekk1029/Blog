@@ -20,7 +20,7 @@ export function Slider() {
   console.log(data);
 
   return (
-    <div className=" flex flex-col bg-white w-[1275px] overflow-hidden ">
+    <div className=" flex flex-col bg-white w-full overflow-hidden ">
       <div className="flex w-[500%] ">
         {data.map((blog) => {
           return <SliderCard key={blog.id} blog={blog} />;

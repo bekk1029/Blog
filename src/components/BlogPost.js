@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { SecondCard } from "./SecondCard";
+import Link from "next/link";
 
 export const BlogPost = () => {
   const [data, setData] = useState([]);
@@ -39,14 +40,20 @@ export const BlogPost = () => {
               <div className="hover:text-red-500">Technology</div>
               <div className="hover:text-red-500">Branding</div>
             </div>
-            <div className="cursor-pointer font-medium text-sm text-gray-800">
-              View All
-            </div>
+            <Link href={`/blog`}>
+              <div className="cursor-pointer font-medium text-sm text-gray-800">
+                View All
+              </div>
+            </Link>
           </div>
         </div>
         <div className="grid grid-cols-3 gap-10">
           {data.map((blog) => {
-            return <SecondCard key={blog.id} blog={blog} />;
+            return (
+              <Link key={blog.id} href={`/blog/${blog.id}`}>
+                <SecondCard blog={blog} />
+              </Link>
+            );
           })}
         </div>
       </div>
