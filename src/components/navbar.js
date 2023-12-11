@@ -4,7 +4,9 @@ import { Search } from "../assets/Search";
 export function Navbar() {
   return (
     <div className="flex gap-[130px] justify-between w-full items-center">
-      <Logo />
+      <Link href="/">
+        <Logo />
+      </Link>
       <div className="flex justify-center items-center gap-20 font-normal text-base text-gray-800">
         <div className="flex items-center gap-4  cursor-pointer">
           <Link href="/">Home</Link>

@@ -5,7 +5,7 @@ import { SecondCard } from "@/components/SecondCard";
 
 export function Blog() {
   const [data, setData] = useState([]);
-  const [posts, setPosts] = useState(15);
+  const [posts, setPosts] = useState(27);
 
   useEffect(() => {
     const getData = async () => {
@@ -24,7 +24,8 @@ export function Blog() {
 
   console.log(data);
   return (
-    <div className="flex flex-col gap-20 mt-5">
+    <div className="flex flex-col gap-12 mt-5">
+      <h1 className="text-4xl font-bold leading-7 text-black">All Blog Post</h1>
       <div className="w-full flex flex-col gap-12">
         <div className="grid grid-cols-3 gap-10">
           {data.map((blog) => {
