@@ -23,16 +23,20 @@ export function Footer() {
             <div>Phone : 880 123 456 789</div>
           </div>
         </div>
-        <div className="flex flex-col justify-center items-center gap-20 font-normal text-base text-gray-800">
-          <div className="flex items-center gap-4  cursor-pointer">
-            <Link href="/">Home</Link>
+        <div className="flex justify-center items-center">
+          <div className="flex flex-col justify-center items-start gap-2 font-normal text-base text-gray-800">
+            <div className="flex items-start gap-4  cursor-pointer">
+              <Link href="/">Home</Link>
+            </div>
+            <div className="flex items-center gap-4 cursor-pointer ">
+              <Link href="/blog">Blog</Link>
+            </div>
+            <div className="flex text-center items-center gap-4 cursor-pointer ">
+              Contact
+            </div>
           </div>
-          <div className="flex items-center gap-4 cursor-pointer ">
-            <Link href="/blog">Blog</Link>
-          </div>
-          <div className="flex items-center gap-4 cursor-pointer ">Contact</div>
         </div>
-        <div className="flex justify-start items-start gap-3">
+        <div className="flex justify-start  items-start gap-3">
           <FB />
           <In />
           <IG />
