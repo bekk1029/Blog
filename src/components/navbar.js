@@ -14,7 +14,9 @@ export function Navbar() {
         <div className="flex items-center gap-4 cursor-pointer ">
           <Link href="/blog">Blog</Link>
         </div>
-        <div className="flex items-center gap-4 cursor-pointer ">Contact</div>
+        <div className="flex items-center gap-4 cursor-pointer ">
+          <Link href="/contact">Contact</Link>
+        </div>
       </div>
       <div className="bg-gray-300 flex  items-center p-1 gap-2 rounded-md ">
         <input placeholder="Search" className="bg-gray-300 w-40" />

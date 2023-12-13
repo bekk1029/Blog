@@ -32,7 +32,7 @@ export function Footer() {
               <Link href="/blog">Blog</Link>
             </div>
             <div className="flex text-center items-center gap-4 cursor-pointer ">
-              Contact
+              <Link href="/contact">Contact</Link>
             </div>
           </div>
         </div>
