@@ -1,12 +1,19 @@
-import { Slider } from "./Slider";
-import { Trend } from "./Trend";
-import { BlogPost } from "./BlogPost";
-export function Content() {
+"use client";
+import Head from "next/head";
+import { Carousel } from "./carousel";
+import { Trending } from "./Trend";
+import { useEffect, useState, useContext, createContext } from "react";
+import { BlogPosts } from "./BlogPost";
+export const DataContext = createContext();
+export default function Content() {
   return (
-    <div className="w-full flex flex-col items-center gap-[100px]">
-      <Slider />
-      <Trend />
-      <BlogPost />
-    </div>
+    <DataContext.Provider value={{}}>
+      <div className="flex flex-col bg-white max-w-[1216px] m-auto gap-[100px]">
+        <Carousel />
+        <Trending />
+        <BlogPosts />
+      </div>
+    </DataContext.Provider>
   );
 }
+export const useData = () => useContext(DataContext);

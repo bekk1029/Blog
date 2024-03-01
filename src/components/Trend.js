@@ -1,34 +1,30 @@
-"use client";
-
-import { useEffect, useState } from "react";
-import { Postcard } from "./PostCard";
-export function Trend() {
-  // const [pages, setPages] = useState(4);
-  const [data, setData] = useState([]);
-
+import { useState, useEffect, useRef } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { TrendingPost } from "./TrendingCard";
+import { useSearch } from "@/app/layout";
+export function Trending() {
+  const [trend, setTrend] = useState([]);
+  const { search } = useSearch();
+  const ref = useRef();
   useEffect(() => {
-    const getData = async () => {
-      const res = await fetch("https://dev.to/api/articles?top=4&per_page=4");
-      const jsonData = await res.json();
-      setData(jsonData);
-    };
-
-    getData();
-  }, []);
-
-  console.log(data);
-
+    fetch(`https://dev.to/api/articles?per_page=4&${search}`)
+      .then((response) => response.json())
+      .then((trend) => setTrend(trend));
+  }, [search]);
+  console.log(search);
+  if (!trend) return null;
   return (
-    <div className="w-full flex bg-white text-gray-800 flex-col items-center">
-      <div className="flex flex-col items-start gap-30">
-        <div className="flex items-start gap-10 text-2xl font-bold leading-7">
-          Trending
-        </div>
-        <div className="w-full grid grid-cols-4 gap-8 h-[360px]">
-          {data.map((blog) => {
-            return <Postcard key={blog.id} blog={blog} />;
-          })}
-        </div>
+    <div className="w-full flex flex-col gap-[30px] mt-[30px] md:mt-0">
+      <h2 className="text-2xl font-bold text-[#181A2A] ml-[32px] md:ml-0 ">
+        Trending
+      </h2>
+      <div className="grid md:grid-cols-4 grid-cols-1 gap-5 pl-8 pr-[65px] md:px-0">
+        {trend.map((trend) => (
+          <Link href={`/blog/${trend.id}`}>
+            <TrendingPost key={trend.id} {...trend} />
+          </Link>
+        ))}
       </div>
     </div>
   );

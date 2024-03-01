@@ -1,41 +1,43 @@
 "use client";
-
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext, createContext } from "react";
 import { useParams } from "next/navigation";
 
-export default function SinglePost() {
+export default function Post() {
   const { id } = useParams();
-  const [data, setData] = useState();
+  const [posts, setPosts] = useState();
 
   useEffect(() => {
     if (!id) return;
-
     const getData = async () => {
       const res = await fetch(`https://dev.to/api/articles/${id}`);
-      const jsonData = await res.json();
-      setData(jsonData);
+      const data = await res.json();
+      setPosts(data);
     };
-
     getData();
   }, [id]);
+  //   fetch(`https://dev.to/api/articles/${id}`)
+  //     .then((response) => response.json())
+  //     .then((data) => setPosts(data));
+  // }, [id]);
 
-  if (!data) return <>Loading...</>;
-
+  if (!posts) return null;
+  console.log(posts);
   return (
-    <div className="w-screen  py-90 bg-white m-auto flex justify-center my-10">
-      <div className="flex flex-col justify-center items-center w-2/3">
-        <div className="w-3/5 flex flex-col justify-center items-center gap-7">
-          <div className="text-gray-400 text-lg">{data.profile_image}</div>
-          <div className="text-gray-400 text-lg">{data.name}</div>
-          <div className="text-gray-400 text-lg">
-            {data.published_timestamp}
-          </div>
-          <img src={data.cover_image} />
-          <div>{data.description}</div>
-          <div>{data.description}</div>
-          <div>{data.description}</div>
-        </div>
+    <div className="md:max-w-[800px] w-full flex-flex-col mx-auto mt-[100px] mb-[80px] gap-8">
+      <h2 className="text-4xl font-semibold text-[#181A2A]">{posts.title}</h2>
+      <div className="flex items-center justify-left gap-6 text-[#696A75] text-sm mt-5 mb-8">
+        <img className="w-7 h-7 rounded-full" src={posts.user.profile_image} />
+        <p className="font-medium">{posts.user.name}</p>
+        <p className="font-normal">{posts.published_at.slice(0, 10)}</p>
       </div>
+      <img className="w-full rounded-xl obect-cover" src={posts.social_image} />
+      <p className="text-justify text-[#3B3C4A] text-xl font-normal mt-8">
+        {posts.body_html}
+      </p>
+      <p
+        className="singlePostBody"
+        dangerouslySetInnerHTML={{ __html: posts.body_html }}
+      ></p>
     </div>
   );
 }

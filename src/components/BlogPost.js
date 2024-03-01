@@ -1,70 +1,96 @@
-"use client";
-
-import { useEffect, useState } from "react";
-import { SecondCard } from "./SecondCard";
+import { Post } from "./Post";
 import Link from "next/link";
-
-export const BlogPost = () => {
-  const [data, setData] = useState([]);
-  const [posts, setPosts] = useState(9);
+import { useState, useEffect } from "react";
+import { useSearch } from "@/app/layout";
+export function BlogPosts() {
+  const [posts, setPosts] = useState([]);
+  const [loadMore, setLoadMore] = useState(9);
+  const [category, setCategory] = useState(" ");
+  const [active, setActive] = useState(false);
+  const { search } = useSearch();
 
   useEffect(() => {
-    const getData = async () => {
-      const res = await fetch(
-        `https://dev.to/api/articles?top=4&per_page=${posts}`
-      );
-      const jsonData = await res.json();
-      setData(jsonData);
-    };
-
-    getData();
-  }, [posts]);
-  function More() {
-    return setPosts(posts + 3);
-  }
-
-  console.log(data);
+    fetch(
+      `https://dev.to/api/articles/latest?per_page=${loadMore}&tag=${category}?${search}`
+    )
+      .then((response) => response.json())
+      .then((data) => setPosts(data));
+  }, [category, loadMore, search]);
+  const addLoad = () => {
+    setLoadMore(loadMore + 3);
+  };
+  const getCategory = (event) => {
+    event.target.textContent !== "All"
+      ? setCategory(event.target.textContent.toLowerCase())
+      : setCategory(" ");
+  };
   return (
-    <div className="flex flex-col gap-20">
-      <div className="w-full flex flex-col  gap-12">
-        <div className="flex flex-col items-start gap-12">
-          <h1 className="text-4xl font-bold leading-7 text-black">
-            All Blog Post
-          </h1>
-          <div className="w-full flex items-center justify-between gap-3">
-            <div className="font-medium text-sm cursor-pointer text-gray-800 flex items-center gap-8">
-              <div className="hover:text-red-500">All</div>
-              <div className="hover:text-red-500">Design</div>
-              <div className="hover:text-red-500">Travel</div>
-              <div className="hover:text-red-500">Fashion</div>
-              <div className="hover:text-red-500">Technology</div>
-              <div className="hover:text-red-500">Branding</div>
-            </div>
-            <Link href={`/blog`}>
-              <div className="cursor-pointer font-medium text-sm text-gray-800">
-                View All
-              </div>
-            </Link>
-          </div>
-        </div>
-        <div className="grid grid-cols-3 gap-10">
-          {data.map((blog) => {
-            return (
-              <Link key={blog.id} href={`/blog/${blog.id}`}>
-                <SecondCard blog={blog} />
-              </Link>
-            );
-          })}
+    <div className="w-full flex flex-col gap-8">
+      <div className="flex flex-col gap-8">
+        <h2 className="text-2xl font-bold text-[#181A2A] ml-4 md:ml-0 ">
+          All Blog Post
+        </h2>
+        <div className="flex justify-between ml-4 md:ml-0">
+          <ul className="flex justify-start items-center gap-5 h-[25px] text-base font-bold text-[#495057] cursor-pointer">
+            <li
+              onClick={getCategory}
+              style={{ color: category == " " ? "#D4A373" : "#495057" }}
+            >
+              All
+            </li>
+            <li
+              onClick={getCategory}
+              style={{ color: category == "design" ? "#D4A373" : "#495057" }}
+            >
+              Design
+            </li>
+            <li
+              onClick={getCategory}
+              style={{ color: category == "travel" ? "#D4A373" : "#495057" }}
+            >
+              Travel
+            </li>
+            <li
+              onClick={getCategory}
+              style={{ color: category == "fashion" ? "#D4A373" : "#495057" }}
+            >
+              Fashion
+            </li>
+            <li
+              onClick={getCategory}
+              style={{
+                color: category == "technology" ? "#D4A373" : "#495057",
+              }}
+            >
+              Technology
+            </li>
+            <li
+              onClick={getCategory}
+              style={{ color: category == "branding" ? "#D4A373" : "#495057" }}
+            >
+              Branding
+            </li>
+          </ul>
+          <p className="flex justify-start items-center gap-5 h-[25px] text-base font-bold text-[#495057] cursor-pointer mr-4 md:mr-0">
+            <Link href={"/blog"}>View All</Link>
+          </p>
         </div>
       </div>
-      <div className="flex justify-center items-center">
-        <button
-          onClick={More}
-          className="items-center py-2 px-4 rounded-md border-[2px] border-gray-400 text-xl font-medium text-gray-600"
-        >
-          Load More
-        </button>
+
+      <div className="grid md:grid-cols-3 grid-cols-1 gap-5 cursor-pointer">
+        {posts.map((post) => (
+          <Link key={post.id} href={`/Blog/${post.id}`}>
+            <Post key={post.id} {...post} category={category} />
+          </Link>
+        ))}
       </div>
+      <button
+        onClick={addLoad}
+        className="mx-auto my-[100px] w-fit px-5 py-3 text-[#696A75] text-base font-medium border border-[#696A754D] rounded-md"
+        type="button"
+      >
+        Load More
+      </button>
     </div>
   );
-};
+}

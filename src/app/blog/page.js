@@ -1,55 +1,39 @@
 "use client";
-
 import { useEffect, useState } from "react";
-import { SecondCard } from "@/components/SecondCard";
+import { SinglePost } from "@/components/SecondCard";
+import { useSearch } from "../layout";
 import Link from "next/link";
-
-export default function Home() {
-  const [data, setData] = useState([]);
-  const [posts, setPosts] = useState(27);
-
+export default function Blog() {
+  const [posts, setPosts] = useState([]);
+  const [load, setLoadMore] = useState(12);
+  const { search } = useSearch();
+  const addLoad = () => {
+    setLoadMore(load + 3);
+  };
   useEffect(() => {
-    const getData = async () => {
-      const res = await fetch(
-        `https://dev.to/api/articles?top=4&per_page=${posts}`
-      );
-      const jsonData = await res.json();
-      setData(jsonData);
-    };
-
-    getData();
-  }, [posts]);
-  function More() {
-    return setPosts(posts + 6);
-  }
+    fetch(`https://dev.to/api/articles?per_page=${load}?${search}`)
+      .then((response) => response.json())
+      .then((data) => setPosts(data));
+  }, [load, search]);
   return (
-    <div className="w-screen  py-90 bg-white m-auto flex justify-center my-10">
-      <div className="flex flex-col w-2/3 ">
-        <div className="flex flex-col gap-12 mt-5">
-          <h1 className="text-4xl font-bold leading-7 text-black">
-            All Blog Post
-          </h1>
-          <div className="w-full flex flex-col gap-12">
-            <div className="grid grid-cols-3 gap-10">
-              {data.map((blog) => {
-                return (
-                  <Link key={blog.id} href={`/blog/${blog.id}`}>
-                    <SecondCard blog={blog} />
-                  </Link>
-                );
-              })}
-            </div>
-          </div>
-          <div className="flex justify-center items-center">
-            <button
-              onClick={More}
-              className="items-center py-2 px-4 rounded-md border-[2px] border-gray-400 text-xl font-medium text-gray-600"
-            >
-              Load More
-            </button>
-          </div>
-        </div>
+    <div className="flex flex-col bg-white max-w-[1216px]  m-auto">
+      <h2 className="text-2xl font-bold text-[#181A2A] my-12 ">
+        All Blog Post
+      </h2>
+      <div className=" grid md:grid-cols-3 grid-cols-1 gap-5">
+        {posts.map((post) => (
+          <Link href={`/blog/${post.id}`}>
+            <SinglePost key={post.id} {...post} />
+          </Link>
+        ))}
       </div>
+      <button
+        onClick={addLoad}
+        className="mx-auto my-[100px] w-fit px-5 py-3 text-[#696A75] text-base font-medium border border-[#696A754D] rounded-md"
+        type="button"
+      >
+        Load More
+      </button>
     </div>
   );
 }
