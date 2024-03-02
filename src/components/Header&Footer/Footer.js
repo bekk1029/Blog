@@ -3,6 +3,7 @@ import { IG } from "@/assets/IG";
 import { In } from "@/assets/LN";
 import { Tw } from "@/assets/Tw";
 import { Logo } from "@/assets/Logo";
+import Image from "next/image";
 
 import Link from "next/link";
 export function Footer() {

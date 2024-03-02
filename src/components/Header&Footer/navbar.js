@@ -3,6 +3,7 @@ import { useSearch } from "@/app/layout";
 import { BurgerMenu } from "../BurgerMenu";
 import { Logo } from "@/assets/Logo";
 import { Search } from "@/assets/Search";
+import Image from "next/image";
 
 export function Navbar() {
   const { search, setSearch, hide, setHide } = useSearch();
@@ -36,9 +37,12 @@ export function Navbar() {
             placeholder="search"
             value={search}
           />
-          <img className="h-4 w-4 top-3 right-4 absolute" src="/magGlass.png" />
+          <Image
+            className="h-4 w-4 top-3 right-4 absolute"
+            src="/magGlass.png"
+          />
         </div>
-        <img
+        <Image
           onClick={() => {
             setHide(false);
           }}

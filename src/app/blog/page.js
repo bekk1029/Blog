@@ -22,8 +22,8 @@ export default function Blog() {
       </h2>
       <div className=" grid md:grid-cols-3 grid-cols-1 gap-5">
         {posts.map((post) => (
-          <Link href={`/blog/${post.id}`}>
-            <SinglePost key={post.id} {...post} />
+          <Link key={post.id} href={`/blog/${post.id}`}>
+            <SinglePost {...post} />
           </Link>
         ))}
       </div>

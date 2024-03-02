@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState, useContext, createContext } from "react";
 import { useParams } from "next/navigation";
+import Image from "next/image";
 
 export default function Post() {
   const { id } = useParams();
@@ -26,11 +27,17 @@ export default function Post() {
     <div className="md:max-w-[800px] w-full flex-flex-col mx-auto mt-[100px] mb-[80px] gap-8">
       <h2 className="text-4xl font-semibold text-[#181A2A]">{posts.title}</h2>
       <div className="flex items-center justify-left gap-6 text-[#696A75] text-sm mt-5 mb-8">
-        <img className="w-7 h-7 rounded-full" src={posts.user.profile_image} />
+        <Image
+          className="w-7 h-7 rounded-full"
+          src={posts.user.profile_image}
+        />
         <p className="font-medium">{posts.user.name}</p>
         <p className="font-normal">{posts.published_at.slice(0, 10)}</p>
       </div>
-      <img className="w-full rounded-xl obect-cover" src={posts.social_image} />
+      <Image
+        className="w-full rounded-xl obect-cover"
+        src={posts.social_image}
+      />
       <p className="text-justify text-[#3B3C4A] text-xl font-normal mt-8">
         {posts.body_html}
       </p>

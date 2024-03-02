@@ -21,8 +21,8 @@ export function Trending() {
       </h2>
       <div className="grid md:grid-cols-4 grid-cols-1 gap-5 pl-8 pr-[65px] md:px-0">
         {trend.map((trend) => (
-          <Link href={`/blog/${trend.id}`}>
-            <TrendingPost key={trend.id} {...trend} />
+          <Link key={trend.id} href={`/blog/${trend.id}`}>
+            <TrendingPost {...trend} />
           </Link>
         ))}
       </div>

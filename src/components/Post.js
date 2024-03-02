@@ -1,3 +1,4 @@
+import Image from "next/image";
 export function Post({
   social_image,
   cover_image,
@@ -8,7 +9,7 @@ export function Post({
 }) {
   return (
     <div className="flex flex-col gap-2 w-full p-4 border border-[#E8E8EA] rounded-xl ">
-      <img
+      <Image
         className="aspect-[3/2] object-cover rounded-md"
         src={cover_image === null ? social_image : cover_image}
       />

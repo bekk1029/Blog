@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSearch } from "@/app/layout";
 import Link from "next/link";
+import Image from "next/image";
 export function Carousel() {
   const [carousel, setCarousel] = useState([]);
   const [page, setPage] = useState(1);
@@ -26,7 +27,7 @@ export function Carousel() {
             key={carousel.id}
             className="relative rounded-xl overflow-hidden"
           >
-            <img
+            <Image
               className="w-full object-cover"
               src={
                 carousel[page].cover_image != null
