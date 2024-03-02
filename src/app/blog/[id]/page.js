@@ -28,6 +28,7 @@ export default function Post() {
       <h2 className="text-4xl font-semibold text-[#181A2A]">{posts.title}</h2>
       <div className="flex items-center justify-left gap-6 text-[#696A75] text-sm mt-5 mb-8">
         <Image
+          alt="End xurag bhgui bn"
           className="w-7 h-7 rounded-full"
           src={posts.user.profile_image}
         />
@@ -35,6 +36,7 @@ export default function Post() {
         <p className="font-normal">{posts.published_at.slice(0, 10)}</p>
       </div>
       <Image
+        alt="End xurag bhgui bn"
         className="w-full rounded-xl obect-cover"
         src={posts.social_image}
       />

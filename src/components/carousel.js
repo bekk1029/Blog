@@ -28,6 +28,7 @@ export function Carousel() {
             className="relative rounded-xl overflow-hidden"
           >
             <Image
+              alt="End xurag bhgui bn"
               className="w-full object-cover"
               src={
                 carousel[page].cover_image != null

@@ -38,11 +38,13 @@ export function Navbar() {
             value={search}
           />
           <Image
+            alt="End xurag bhgui bn"
             className="h-4 w-4 top-3 right-4 absolute"
             src="/magGlass.png"
           />
         </div>
         <Image
+          alt="End xurag bhgui bn"
           onClick={() => {
             setHide(false);
           }}
