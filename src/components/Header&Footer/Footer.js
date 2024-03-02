@@ -59,6 +59,7 @@ export function Footer() {
               </span>
               <p className="text-base text-[#3B3C4A]">© All Rights Reserved.</p>
             </div>
+            i
           </div>
           <div className="hidden md:flex w-full gap-[21px] justify-end">
             <ul className="flex gap-[40px] font-normal text-base text-[#3B3C4A]  justify-center items-center">

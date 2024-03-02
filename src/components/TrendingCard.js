@@ -5,11 +5,7 @@ export function TrendingPost({ id, social_image, category, tag_list, title }) {
       id={id}
       className="flex w-full md:w-full aspect-square relative rounded-xl overflow-hidden cursor-pointer"
     >
-      <Image
-        alt="End xurag bhgui bn"
-        className="object-cover"
-        src={social_image}
-      />
+      <img alt="End xurag bhgui" className="object-cover" src={social_image} />
       <div className="bg-[#14162466] w-full h-full absolute">
         <div className="flex flex-col absolute top-[50%] left-[5%] gap-4">
           <span className="text-white text-sm font-medium bg-[#4B6BFB] rounded-[6px] w-fit px-[10px] py-1 ">

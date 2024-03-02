@@ -1,4 +1,3 @@
-import Image from "next/image";
 export function SinglePost({
   social_image,
   tag_list,
@@ -8,7 +7,7 @@ export function SinglePost({
 }) {
   return (
     <div className="flex flex-col gap-2 w-full p-4 border border-[#E8E8EA] rounded-xl ">
-      <Image
+      <img
         alt="End xurag bhgui bn"
         className="aspect-[3/2] object-cover rounded-md"
         src={`${social_image}`}
@@ -23,7 +22,7 @@ export function SinglePost({
           </h3>
         </div>
         <div className="flex items-center justtify-start gap-3">
-          <Image
+          <img
             alt="End xurag bhgui bn"
             className="h-9 w-9 rounded-full"
             src={`${user.profile_image}`}
